@@ -178,7 +178,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📬 Contact
 
 **Created by**: Oomszz  
-**Project Link**: [GitHub Repository](https://github.com/Oomszz/Baseline-Inspetor-Browser-Extension)
+**Project Link**: https://github.com/Oomszz/Baseline-Inspector-Browser-Extension.git
 
 ---
 
@@ -196,4 +196,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-_Built with ❤️ for the web development community_
+_Built with ❤️ for the web development community_ by **Omkar.V.Kottalwar**
+
