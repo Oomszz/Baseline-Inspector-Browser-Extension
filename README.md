@@ -1,200 +1,224 @@
-# 🔍 Baseline Inspector
+🔍 Baseline Inspector
 
-> A powerful Chrome extension that analyzes web pages for browser compatibility using the Web Platform Baseline standard.
+A powerful Chrome extension that analyzes web pages for browser compatibility using the Web Platform Baseline standard.
 
-![Baseline Inspector Logo](icons/icon128.png)
+🎯 What is Baseline Inspector?
 
-## 🎯 What is Baseline Inspector?
+Baseline Inspector helps developers instantly identify which CSS, HTML, and JavaScript features are Widely Available, Newly Available, or have Limited Support across browsers. Stop guessing about browser compatibility—get instant insights directly on the page!
 
-Baseline Inspector helps developers instantly identify which CSS features and web platform APIs are **Widely Available**, **Newly Available**, or have **Limited Support** across browsers. Stop guessing about browser compatibility—get instant insights while you develop!
+✨ Features
 
-## ✨ Features
+🎨 Real-time CSS, HTML & JS Analysis - Scans stylesheets, inline styles, HTML elements, and JavaScript API usage
 
-- **🎨 Real-time CSS Analysis** - Scans stylesheets for Baseline feature usage
-- **📊 Visual Dashboard** - Color-coded overlay showing compatibility status
-- **📈 Statistics Panel** - Pie chart breakdown of feature support levels
-- **💡 Smart Suggestions** - Get fallback recommendations for risky features
-- **📤 Export Reports** - Generate HTML/Markdown compatibility reports
-- **⚡ Zero Configuration** - Works instantly on any webpage
+📊 Visual Dashboard - Color-coded overlay showing compatibility status
 
-## 🚀 Installation
+📈 Statistics Panel - Pie chart breakdown of feature support levels
 
-### Load as Unpacked Extension
+💡 Smart Suggestions - Get fallback recommendations for risky features
 
-1. **Download or Clone** this repository:
+📤 Export Reports - Generate HTML/Markdown compatibility reports
 
-   ```bash
-   git clone https://github.com/Oomszz/Baseline-Inspetor-Browser-Extension.git
-   ```
+⚡ Zero Configuration - Works instantly on any webpage
 
-2. **Open Chrome Extensions Page**:
+🚀 Installation
+Load as Unpacked Extension
 
-   - Navigate to `chrome://extensions/`
-   - Or click Menu → More Tools → Extensions
+Download or Clone this repository:
 
-3. **Enable Developer Mode**:
+git clone https://github.com/Oomszz/Baseline-Inspector-Browser-Extension.git
 
-   - Toggle the "Developer mode" switch in the top-right corner
+Open Chrome Extensions Page:
 
-4. **Load the Extension**:
-   - Click "Load unpacked"
-   - Select the `Baseline-Inspetor-Browser-Extension` folder
-   - The extension icon should appear in your toolbar!
+Navigate to chrome://extensions/
 
-## 📖 Usage
+Or click Menu → More Tools → Extensions
 
-### Quick Start (3 Steps)
+Enable Developer Mode:
 
-1. **Click** the Baseline Inspector icon in your Chrome toolbar
-2. **Analyze** - Click "Inspect Current Page" button
-3. **View Results** - See the overlay with feature compatibility
+Toggle the "Developer mode" switch in the top-right corner
 
-### Detailed Workflow
+Load the Extension:
 
-#### Step 1: Open Any Webpage
+Click "Load unpacked"
 
-Navigate to any website you want to analyze (try the included `demo.html` for testing).
+Select the Baseline-Inspector-Browser-Extension folder
 
-#### Step 2: Launch Inspector
+The extension icon should appear in your toolbar!
 
-Click the extension icon and hit **"Inspect Current Page"**.
+📖 Usage
+Quick Start (3 Steps)
 
-#### Step 3: Review the Overlay
+Click the Baseline Inspector icon in your Chrome toolbar
 
-- **🟢 Green Badges** = Widely Available (safe to use)
-- **🟡 Yellow Badges** = Newly Available (use with caution)
-- **🔴 Red Badges** = Limited Support (needs fallbacks)
+Analyze - Click "Inspect Current Page" button
 
-#### Step 4: View Statistics
+View Results - See the overlay with feature compatibility
+
+Detailed Workflow
+Step 1: Open Any Webpage
+
+Navigate to any website you want to analyze (try the included demo.html for testing).
+
+Step 2: Launch Inspector
+
+Click the extension icon and hit "Inspect Current Page".
+
+Step 3: Review the Overlay
+
+🟢 Green Badges = Widely Available (safe to use)
+
+🟡 Yellow Badges = Newly Available (use with caution)
+
+🔴 Red Badges = Limited Support (needs fallbacks)
+
+Step 4: View Statistics
 
 Check the popup for:
 
-- Pie chart breakdown of feature distribution
-- Total feature count
-- Risk assessment
+Pie chart breakdown of feature distribution
 
-#### Step 5: Export Report
+Total feature count
 
-Click **"Export Report"** to download:
+Risk assessment
 
-- HTML report with full details
-- Markdown summary for documentation
+Step 5: Export Report
 
-## 📸 Screenshots
+Click "Export Report" to download:
 
-### Extension Popup
+JSON/HTML report with full details
 
-![Popup Interface](popup.png)
-_Clean, modern interface with instant analysis_
+Markdown summary for documentation
 
-### Overlay on Demo Page
+📸 Screenshots
+Extension Popup
 
-![Overlay Example](overlay.png)
-_Real-time feature detection with color-coded badges_
+Clean, modern interface with instant analysis
 
-### Statistics Dashboard
+Overlay on Demo Page
 
-![Stats Dashboard](stats.png)
-_Visual breakdown of baseline compatibility_
+Real-time CSS, HTML, and JS feature detection with color-coded badges
 
-## 🛠️ Technical Details
+Statistics Dashboard
 
-### Built With
+Visual breakdown of baseline compatibility
 
-- **Vanilla JavaScript** - No frameworks, pure performance
-- **Chrome Extension Manifest V3** - Latest extension API
-- **Tailwind CSS** - Modern, responsive UI
-- **Chart.js** - Beautiful data visualization
-- **Web Features API** - Official Baseline data
+🛠️ Technical Details
+Built With
 
-### Project Structure
+Vanilla JavaScript - No frameworks, pure performance
 
-```
+Chrome Extension Manifest V3 - Latest extension API
+
+Tailwind CSS - Modern, responsive UI
+
+Chart.js - Beautiful data visualization
+
+Web Features API - Official Baseline data
+
+Project Structure
 baseline-inspector/
-├── manifest.json          # Extension configuration
-├── popup.html            # Extension popup UI
-├── popup.js              # Popup logic
-├── content.js            # Page analysis script
-├── background.js         # Service worker
-├── styles.css            # Custom styles
-├── demo.html             # Test page
-└── icons/                # Extension icons
-```
+├── manifest.json # Extension configuration
+├── popup.html # Extension popup UI
+├── popup.js # Popup logic
+├── content.js # Page analysis script (CSS, HTML & JS)
+├── background.js # Service worker
+├── styles.css # Custom styles
+├── demo.html # Test page
+└── icons/ # Extension icons
 
-## 🎨 Demo Page
+🎨 Demo Page
 
-Test the extension on the included `demo.html`:
+Test the extension on the included demo.html:
 
-```bash
 # Open demo.html in Chrome
+
 # Click extension icon
+
 # See instant analysis!
-```
 
 The demo showcases:
 
-- Grid layouts (Widely Available)
-- CSS custom properties (Widely Available)
-- Container queries (Newly Available)
-- Backdrop filters (Limited Support)
+CSS Grid & Flexbox (Widely Available)
 
-## 🌟 Why Baseline Inspector?
+CSS Custom Properties (Widely Available)
 
-### Problem It Solves
+Container Queries & :has() Selector (Newly Available)
 
-Developers waste hours debugging cross-browser issues. Baseline Inspector prevents these issues **before** they happen by:
+Backdrop Filter & color-mix() (Limited Support)
 
-- Identifying risky CSS features during development
-- Providing instant compatibility feedback
-- Suggesting safer alternatives
+HTML5 semantic elements detection
 
-### Unique Differentiators
+JS API usage detection (e.g., fetch, localStorage, Web Animations)
 
-1. **Visual Overlay** - See compatibility inline, not in console
-2. **Statistics Dashboard** - Quick risk assessment at a glance
-3. **Smart Suggestions** - Get fallback recommendations
-4. **Export Reports** - Share compatibility findings with team
+🌟 Why Baseline Inspector?
+Problem It Solves
 
-## 🤝 Contributing
+Developers waste hours debugging cross-browser issues. Baseline Inspector prevents these issues before they happen by:
+
+Identifying risky CSS, HTML, and JS features during development
+
+Providing instant compatibility feedback
+
+Suggesting safer alternatives
+
+Unique Differentiators
+
+Visual Overlay - See compatibility inline, not in console
+
+Multi-Layer Analysis - CSS, HTML, and JS checked together
+
+Statistics Dashboard - Quick risk assessment at a glance
+
+Smart Suggestions - Get fallback recommendations
+
+Export Reports - Share findings with your team
+
+🤝 Contributing
 
 Contributions are welcome! This is an open-source hackathon project.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Fork the repository
 
-## 📄 License
+Create your feature branch (git checkout -b feature/AmazingFeature)
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Commit your changes (git commit -m 'Add some AmazingFeature')
 
-## 🙏 Acknowledgments
+Push to the branch (git push origin feature/AmazingFeature)
 
-- **Web Platform DX Community** - For the Baseline standard
-- **MDN Web Docs** - For feature compatibility data
-- **Chrome Extensions Team** - For the robust platform
+Open a Pull Request
 
-## 📬 Contact
+📄 License
 
-**Created by**: Oomszz  
-**Project Link**: https://github.com/Oomszz/Baseline-Inspector-Browser-Extension.git
+This project is licensed under the MIT License - see the LICENSE
+file for details.
 
----
+🙏 Acknowledgments
 
-⭐ **Star this repo** if you find it useful!  
-🐛 **Report issues** to help improve the extension  
-💡 **Suggest features** for future versions
+Web Platform DX Community - For the Baseline standard
 
-## 🗺️ Roadmap
+MDN Web Docs - For feature compatibility data
 
-- [ ] Firefox & Edge support
-- [ ] JavaScript API detection
-- [ ] Team collaboration features
-- [ ] CI/CD integration
-- [ ] Custom rule configuration
+Chrome Extensions Team - For the robust platform
 
----
+📬 Contact
 
-_Built with ❤️ for the web development community_ by **Omkar.V.Kottalwar**
+Created by: Oomszz
+Project Link: GitHub Repository
 
+⭐ Star this repo if you find it useful!
+🐛 Report issues to help improve the extension
+💡 Suggest features for future versions
+
+🗺️ Roadmap
+
+Firefox & Edge support
+
+Advanced JS API detection
+
+Team collaboration features
+
+CI/CD integration
+
+Custom rule configuration
+
+Built with ❤️ for the web development community by Omkar.V.Kottalwar
