@@ -1,0 +1,112 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-27",
+  "features": {
+    "css": {
+      "grid": {
+        "name": "CSS Grid Layout",
+        "status": "widely",
+        "description": "Two-dimensional grid-based layout system",
+        "browserSupport": {
+          "chrome": { "supported": true, "version": "57" },
+          "firefox": { "supported": true, "version": "52" },
+          "safari": { "supported": true, "version": "10.1" },
+          "edge": { "supported": true, "version": "16" }
+        },
+        "mdnUrl": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout",
+        "baseline": {
+          "high": "2020-01-15",
+          "low": "2017-03-07"
+        }
+      },
+      "flexbox": {
+        "name": "CSS Flexbox",
+        "status": "widely", 
+        "description": "One-dimensional flex layout method",
+        "browserSupport": {
+          "chrome": { "supported": true, "version": "29" },
+          "firefox": { "supported": true, "version": "28" },
+          "safari": { "supported": true, "version": "9" },
+          "edge": { "supported": true, "version": "12" }
+        },
+        "mdnUrl": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout"
+      },
+      "container-queries": {
+        "name": "CSS Container Queries",
+        "status": "newly",
+        "description": "Style elements based on container size",
+        "browserSupport": {
+          "chrome": { "supported": true, "version": "105" },
+          "firefox": { "supported": true, "version": "110" },
+          "safari": { "supported": true, "version": "16" },
+          "edge": { "supported": true, "version": "105" }
+        },
+        "mdnUrl": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Container_Queries"
+      },
+      "backdrop-filter": {
+        "name": "CSS Backdrop Filter",
+        "status": "limited",
+        "description": "Apply filters to backdrop of element",
+        "browserSupport": {
+          "chrome": { "supported": true, "version": "76" },
+          "firefox": { "supported": false, "version": null },
+          "safari": { "supported": true, "version": "9" },
+          "edge": { "supported": true, "version": "79" }
+        },
+        "mdnUrl": "https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter"
+      }
+    },
+    "html": {
+      "dialog": {
+        "name": "HTML Dialog Element",
+        "status": "newly",
+        "description": "Native modal and dialog box element",
+        "browserSupport": {
+          "chrome": { "supported": true, "version": "37" },
+          "firefox": { "supported": true, "version": "98" },
+          "safari": { "supported": true, "version": "15.4" },
+          "edge": { "supported": true, "version": "79" }
+        },
+        "mdnUrl": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog"
+      },
+      "popover": {
+        "name": "HTML Popover Attribute",
+        "status": "limited",
+        "description": "Declarative popover API",
+        "browserSupport": {
+          "chrome": { "supported": true, "version": "114" },
+          "firefox": { "supported": false, "version": null },
+          "safari": { "supported": false, "version": null },
+          "edge": { "supported": true, "version": "114" }
+        },
+        "mdnUrl": "https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover"
+      }
+    },
+    "javascript": {
+      "structured-clone": {
+        "name": "Structured Clone",
+        "status": "newly",
+        "description": "Deep clone objects with structured clone algorithm",
+        "browserSupport": {
+          "chrome": { "supported": true, "version": "98" },
+          "firefox": { "supported": true, "version": "94" },
+          "safari": { "supported": true, "version": "15.4" },
+          "edge": { "supported": true, "version": "98" }
+        },
+        "mdnUrl": "https://developer.mozilla.org/en-US/docs/Web/API/structuredClone"
+      },
+      "array-at": {
+        "name": "Array.at() Method",
+        "status": "widely",
+        "description": "Access array elements with negative indexing",
+        "browserSupport": {
+          "chrome": { "supported": true, "version": "92" },
+          "firefox": { "supported": true, "version": "90" },
+          "safari": { "supported": true, "version": "15.4" },
+          "edge": { "supported": true, "version": "92" }
+        },
+        "mdnUrl": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at"
+      }
+    }
+  }
+}

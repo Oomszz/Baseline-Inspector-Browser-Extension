@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baseline Inspector Demo</title>
+  <style>
+    /* Widely Available Features */
+    :root {
+      --primary: #667eea;
+      --secondary: #764ba2;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Grid Layout - Widely Available */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Flexbox - Widely Available */
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-header {
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      flex: 1;
+    }
+
+    /* Container Queries - Newly Available */
+    @container (min-width: 300px) {
+      .card-body {
+        padding: 2rem;
+      }
+    }
+
+    /* :has() Selector - Newly Available */
+    .card:has(.badge) {
+      border: 2px solid var(--primary);
+    }
+
+    /* Backdrop Filter - Limited Support */
+    .glass {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* color-mix() - Limited Support */
+    .mixed-bg {
+      background: color-mix(in srgb, var(--primary) 50%, white);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .badge-green {
+      background: #c6f6d5;
+      color: #22543d;
+    }
+
+    .badge-yellow {
+      background: #fef3c7;
+      color: #78350f;
+    }
+
+    .badge-red {
+      background: #fecaca;
+      color: #7f1d1d;
+    }
+
+    .demo-box {
+      width: 100%;
+      height: 150px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: white;
+      margin-top: 1rem;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: white;
+      color: var(--primary);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      margin-top: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🔍 Baseline Inspector Demo</h1>
+      <p style="font-size: 1.2rem; opacity: 0.9;">Test page with various CSS features</p>
+      <a href="#" class="cta" onclick="alert('Click the extension icon to analyze!'); return false;">
+        Analyze This Page →
+      </a>
+    </div>
+
+    <div class="grid">
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="card-header">
+          <h2>🟢 Widely Available</h2>
+          <span class="badge badge-green">Safe to Use</span>
+        </div>
+        <div class="card-body">
+          <p>These features work everywhere:</p>
+          <ul style="margin-top: 1rem; line-height: 1.8;">
+            <li>CSS Grid</li>
+            <li>Flexbox</li>
+            <li>CSS Variables</li>
+            <li>Transform</li>
+          </ul>
+          <div class="demo-box" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+            Grid + Variables
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="card-header">
+          <h2>🟡 Newly Available</h2>
+          <span class="badge badge-yellow">Use with Caution</span>
+        </div>
+        <div class="card-body">
+          <p>Recently became widely supported:</p>
+          <ul style="margin-top: 1rem; line-height: 1.8;">
+            <li>Container Queries</li>
+            <li>:has() Selector</li>
+            <li>Subgrid</li>
+          </ul>
+          <div class="demo-box" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+            Container Queries
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card glass">
+        <div class="card-header">
+          <h2>🔴 Limited Support</h2>
+          <span class="badge badge-red">Needs Fallbacks</span>
+        </div>
+        <div class="card-body">
+          <p>Limited browser support:</p>
+          <ul style="margin-top: 1rem; line-height: 1.8;">
+            <li>backdrop-filter</li>
+            <li>color-mix()</li>
+            <li>View Transitions</li>
+          </ul>
+          <div class="demo-box mixed-bg" style="color: #1a202c;">
+            Backdrop + color-mix
+          </div>
+        </div>
+      </div>
+
+      <!-- Instructions Card -->
+      <div class="card" style="grid-column: 1 / -1;">
+        <div class="card-header">
+          <h2>📖 How to Use</h2>
+        </div>
+        <div class="card-body">
+          <ol style="line-height: 2; font-size: 1.1rem;">
+            <li>Click the <strong>Baseline Inspector</strong> icon in your toolbar</li>
+            <li>Click <strong>"Inspect Current Page"</strong></li>
+            <li>View the results showing detected features</li>
+            <li>Export a report if needed</li>
+          </ol>
+          <p style="margin-top: 1.5rem; padding: 1rem; background: #f7fafc; border-radius: 8px;">
+            <strong>💡 Expected Results:</strong> This page should detect around 10-15 features across all three categories!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    console.log('🔍 Baseline Inspector Demo Page Loaded');
+    console.log('Features: Grid, Flexbox, Variables, Container Queries, :has(), backdrop-filter, color-mix()');
+  </script>
+</body>
+</html>
