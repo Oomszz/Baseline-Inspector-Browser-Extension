@@ -2,7 +2,7 @@
 
 > A powerful Chrome extension that analyzes web pages for browser compatibility using the Web Platform Baseline standard.
 
-![Baseline Inspector Logo](images/icon128.png)
+![Baseline Inspector Logo](icons/icon128.png)
 
 ## 🎯 What is Baseline Inspector?
 
@@ -81,12 +81,6 @@ Click **"Export Report"** to download:
 - Markdown summary for documentation
 
 ## 📸 Screenshots
-![alt text](popup.png)
--popup.png
-
-![alt text](overlay.png)
--overlay.png
-
 
 ### Extension Popup
 
@@ -97,7 +91,6 @@ _Clean, modern interface with instant analysis_
 
 ![Overlay Example](overlay.png)
 _Real-time feature detection with color-coded badges_
-
 
 ### Statistics Dashboard
 
