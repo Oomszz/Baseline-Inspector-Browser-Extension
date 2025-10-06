@@ -1,7 +1,7 @@
-(function() {
+(function () {
   'use strict';
-  
-  console.log('🔍 Baseline Inspector: Content script initialized');
+
+  console.log('🔍 Baseline Inspector: Enhanced Content Script Initialized');
 
   if (window.baselineInspectorLoaded) {
     console.log('Content script already loaded, skipping...');
@@ -11,43 +11,51 @@
 
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log('Content script received message:', request);
-    
+
     if (request.action === 'analyze') {
-      try {
-        const results = analyzeCurrentPage();
-        console.log('Analysis complete:', results);
-        sendResponse({ success: true, features: results });
-      } catch (error) {
-        console.error('Analysis error:', error);
-        sendResponse({ success: false, error: error.message });
-      }
+      (async () => {
+        try {
+          const results = await analyzeCurrentPage();
+          console.log('✅ Full Analysis Complete:', results);
+          sendResponse({ success: true, features: results });
+        } catch (error) {
+          console.error('❌ Analysis error:', error);
+          sendResponse({ success: false, error: error.message });
+        }
+      })();
       return true;
     }
 
     if (request.action === 'getFeatures') {
-      try {
-        const results = analyzeCurrentPage();
-        sendResponse({ features: results });
-      } catch (error) {
-        sendResponse({ features: [] });
-      }
+      (async () => {
+        try {
+          const results = await analyzeCurrentPage();
+          sendResponse({ features: results });
+        } catch (error) {
+          sendResponse({ features: [] });
+        }
+      })();
       return true;
     }
   });
 
-  function analyzeCurrentPage() {
-    console.log('Starting page analysis...');
-    
+  async function analyzeCurrentPage() {
+    console.log('Starting full page analysis...');
+
+    const cssFeatures = analyzeCSSFeatures();
+    const htmlFeatures = analyzeHTMLFeatures();
+    const jsFeatures = await analyzeJSFeatures();
+
+    const combined = [...cssFeatures, ...htmlFeatures, ...jsFeatures];
+    console.log(`📊 Combined Feature Count: ${combined.length}`);
+
+    return combined;
+  }
+
+  // -------------------- 🧩 CSS ANALYSIS (Existing) --------------------
+  function analyzeCSSFeatures() {
     const featureDatabase = {
       'display: grid': {
-        name: 'CSS Grid Layout',
-        status: 'widely',
-        group: 'css',
-        description: 'Two-dimensional layout system for the web',
-        element: 'display',
-        browserSupport: { chrome: true, firefox: true, safari: true, edge: true }
-      },
-      'display:grid': {
         name: 'CSS Grid Layout',
         status: 'widely',
         group: 'css',
@@ -63,28 +71,12 @@
         element: 'display',
         browserSupport: { chrome: true, firefox: true, safari: true, edge: true }
       },
-      'display:flex': {
-        name: 'Flexbox',
-        status: 'widely',
-        group: 'css',
-        description: 'One-dimensional flexible box layout',
-        element: 'display',
-        browserSupport: { chrome: true, firefox: true, safari: true, edge: true }
-      },
       'var(--': {
         name: 'CSS Custom Properties',
         status: 'widely',
         group: 'css',
         description: 'CSS variables for reusable values',
         element: 'custom-property',
-        browserSupport: { chrome: true, firefox: true, safari: true, edge: true }
-      },
-      'transform:': {
-        name: 'CSS Transforms',
-        status: 'widely',
-        group: 'css',
-        description: 'Modify element appearance in 2D/3D space',
-        element: 'transform',
         browserSupport: { chrome: true, firefox: true, safari: true, edge: true }
       },
       '@container': {
@@ -103,22 +95,6 @@
         element: ':has()',
         browserSupport: { chrome: true, firefox: true, safari: true, edge: true }
       },
-      'subgrid': {
-        name: 'CSS Subgrid',
-        status: 'newly',
-        group: 'css',
-        description: 'Nested grid inheriting parent tracks',
-        element: 'grid-template',
-        browserSupport: { chrome: true, firefox: true, safari: true, edge: false }
-      },
-      ':is(': {
-        name: ':is() Selector',
-        status: 'newly',
-        group: 'css',
-        description: 'Matches any selector in list',
-        element: ':is()',
-        browserSupport: { chrome: true, firefox: true, safari: true, edge: true }
-      },
       'backdrop-filter': {
         name: 'Backdrop Filter',
         status: 'limited',
@@ -126,51 +102,25 @@
         description: 'Apply filters to backdrop',
         element: 'backdrop-filter',
         browserSupport: { chrome: true, firefox: false, safari: true, edge: true }
-      },
-      'color-mix': {
-        name: 'color-mix()',
-        status: 'limited',
-        group: 'css',
-        description: 'Mix two colors in CSS',
-        element: 'color-mix()',
-        browserSupport: { chrome: true, firefox: true, safari: true, edge: false }
-      },
-      '@starting-style': {
-        name: '@starting-style',
-        status: 'limited',
-        group: 'css',
-        description: 'Define starting styles for transitions',
-        element: '@starting-style',
-        browserSupport: { chrome: true, firefox: false, safari: false, edge: false }
       }
     };
 
     const foundFeatures = [];
     const seenFeatures = new Set();
 
-    // Analyze stylesheets
     try {
       const stylesheets = Array.from(document.styleSheets);
-      console.log(`Analyzing ${stylesheets.length} stylesheets...`);
-      
       stylesheets.forEach((sheet, index) => {
         try {
-          const rules = Array.from(sheet.cssRules || sheet.rules || []);
-          
+          const rules = Array.from(sheet.cssRules || []);
           rules.forEach(rule => {
             const cssText = rule.cssText.toLowerCase();
-            
             Object.entries(featureDatabase).forEach(([pattern, featureData]) => {
-              if (cssText.includes(pattern.toLowerCase())) {
-                const featureId = featureData.name.toLowerCase().replace(/\s+/g, '-');
-                
-                if (!seenFeatures.has(featureId)) {
-                  foundFeatures.push({
-                    id: featureId,
-                    ...featureData
-                  });
-                  seenFeatures.add(featureId);
-                  console.log(`Found: ${featureData.name} (${featureData.status})`);
+              if (cssText.includes(pattern)) {
+                const id = featureData.name.toLowerCase().replace(/\s+/g, '-');
+                if (!seenFeatures.has(id)) {
+                  foundFeatures.push({ id, ...featureData });
+                  seenFeatures.add(id);
                 }
               }
             });
@@ -183,25 +133,17 @@
       console.error('Error analyzing stylesheets:', e);
     }
 
-    // Analyze inline styles
+    // Inline styles
     try {
       const elements = document.querySelectorAll('[style]');
-      console.log(`Analyzing ${elements.length} inline styles...`);
-      
       elements.forEach(el => {
         const style = el.getAttribute('style').toLowerCase();
-        
         Object.entries(featureDatabase).forEach(([pattern, featureData]) => {
-          if (style.includes(pattern.toLowerCase())) {
-            const featureId = featureData.name.toLowerCase().replace(/\s+/g, '-');
-            
-            if (!seenFeatures.has(featureId)) {
-              foundFeatures.push({
-                id: featureId,
-                ...featureData
-              });
-              seenFeatures.add(featureId);
-              console.log(`Found in inline: ${featureData.name} (${featureData.status})`);
+          if (style.includes(pattern)) {
+            const id = featureData.name.toLowerCase().replace(/\s+/g, '-');
+            if (!seenFeatures.has(id)) {
+              foundFeatures.push({ id, ...featureData });
+              seenFeatures.add(id);
             }
           }
         });
@@ -210,10 +152,95 @@
       console.error('Error analyzing inline styles:', e);
     }
 
-    console.log(`Total features found: ${foundFeatures.length}`, foundFeatures);
+    console.log(`🎨 CSS features found: ${foundFeatures.length}`);
     return foundFeatures;
   }
 
-  console.log('Content script ready and listening');
+  // -------------------- 🧱 HTML ANALYSIS --------------------
+  function analyzeHTMLFeatures() {
+    const htmlFeatures = [];
+    const seen = new Set();
 
+    const allElements = Array.from(document.querySelectorAll('*'));
+    const uniqueTags = [...new Set(allElements.map(el => el.tagName.toLowerCase()))];
+
+    const tagCategory = {
+      widely: ['div', 'span', 'a', 'p', 'input', 'button', 'img'],
+      newly: ['dialog', 'template', 'slot', 'picture', 'video', 'audio'],
+      limited: ['marquee', 'blink']
+    };
+
+    uniqueTags.forEach(tag => {
+      let status = 'widely';
+      if (tagCategory.newly.includes(tag)) status = 'newly';
+      if (tagCategory.limited.includes(tag)) status = 'limited';
+
+      const id = `html-${tag}`;
+      if (!seen.has(id)) {
+        htmlFeatures.push({
+          id,
+          name: `<${tag}> element`,
+          status,
+          group: 'html',
+          description: `HTML ${tag} element`,
+          element: tag,
+          browserSupport: { chrome: true, firefox: true, safari: true, edge: true }
+        });
+        seen.add(id);
+      }
+    });
+
+    console.log(`🧩 HTML features found: ${htmlFeatures.length}`);
+    return htmlFeatures;
+  }
+
+  // -------------------- ⚙️ JS ANALYSIS --------------------
+  async function analyzeJSFeatures() {
+    const jsResults = [];
+    const seen = new Set();
+    const scripts = Array.from(document.querySelectorAll('script'));
+
+    for (const script of scripts) {
+      let code = '';
+      try {
+        if (script.src) {
+          const res = await fetch(script.src);
+          code = await res.text();
+        } else {
+          code = script.textContent;
+        }
+
+        const checks = [
+          { pattern: 'fetch(', name: 'Fetch API', status: 'widely' },
+          { pattern: 'Promise', name: 'Promises', status: 'widely' },
+          { pattern: 'async ', name: 'Async/Await', status: 'newly' },
+          { pattern: 'navigator.serviceWorker', name: 'Service Workers', status: 'newly' },
+          { pattern: 'BigInt', name: 'BigInt', status: 'limited' },
+          { pattern: 'WebSocket', name: 'WebSockets', status: 'widely' }
+        ];
+
+        for (const { pattern, name, status } of checks) {
+          if (code.includes(pattern) && !seen.has(name)) {
+            jsResults.push({
+              id: name.toLowerCase().replace(/\s+/g, '-'),
+              name,
+              status,
+              group: 'js',
+              description: `${name} feature detected in script`,
+              element: 'script',
+              browserSupport: { chrome: true, firefox: true, safari: true, edge: true }
+            });
+            seen.add(name);
+          }
+        }
+      } catch (err) {
+        console.warn('⚠️ JS analysis failed for', script.src || 'inline script', err.message);
+      }
+    }
+
+    console.log(`🧠 JS features found: ${jsResults.length}`);
+    return jsResults;
+  }
+
+  console.log('✅ Baseline Inspector Content Script Ready');
 })();
